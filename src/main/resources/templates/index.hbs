@@ -1,0 +1,26 @@
+{{#partial "content"}}
+
+    <h1>Welcome to my Portfolio Page made with SPARK</h1>
+    <div>This Page has been made with, Java HandleBars and is hosted by Spark MicroFramework</div>
+    <div>The page is using Moustache Template</div>
+
+
+    <form action="/sign-in" method="post">
+        <input type="text" placeholder="Tell me who visited my page? " name="username">
+        <button>Click!</button>
+
+    </form>
+
+    <form action="/projects" method="get">
+        <button>My Projects</button>
+    </form>
+
+    <form action="/about" method="get">
+        <button>About me!</button>
+    </form>
+
+    </body>
+
+{{/partial}}
+
+{{> base.hbs}}
