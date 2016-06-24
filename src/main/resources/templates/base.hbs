@@ -2,17 +2,22 @@
     <!doctype html>
     <html lang="en">
     <head>
+
         <meta charset="UTF-8">
         <title>{{#block "title" }}Welcome to my Portfolio Page made with Spark{{/block}}</title>
         <link rel="stylesheet" href="/css/main.css">
     </head>
     <body>
+    {{#if flashMessage}}
+        <p id="flash-message">{{ flashMessage }}</p>
+    {{/if}}
 {{/block}}
 
 {{#block "content"}}{{/block}}
 
 
 {{#block "footer"}}
+
     </body>
     </html>
 {{/block}}

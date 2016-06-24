@@ -1,7 +1,5 @@
 package com.home.portfolio;
 
-import com.home.portfolio.model.PortfolioProjectDAO;
-import com.home.portfolio.model.SimpleProjectDAO;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
@@ -12,10 +10,23 @@ import static spark.Spark.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        staticFileLocation("/public");
-        PortfolioProjectDAO dao = new SimpleProjectDAO();
 
+    public static void main(String[] args) {
+
+        staticFileLocation("/public");
+        //ne pip!!!
+        /*before((request, response) -> {
+            if (request.attribute("username") != null) {
+                request.attribute("username", request.attribute("username"));
+            }
+        });
+
+        before("/sign-in", ((request, response) -> {
+            if (request.attribute("username") == null) {
+                response.redirect("/");
+                halt();
+            }
+        }));*/
         get("/", (req, res) -> {
             Map<String, String> model = new HashMap<>();
             model.put("username", req.cookie("username"));
@@ -26,7 +37,6 @@ public class Main {
             Map<String, String> model = new HashMap<>();
             String username = request.queryParams("username");
             response.cookie("username", username);
-            model.put("username", username);
             return new ModelAndView(model, "sign-in.hbs");
         }), new HandlebarsTemplateEngine());
 
@@ -40,6 +50,6 @@ public class Main {
             return new ModelAndView(model, "about.hbs");
         }, new HandlebarsTemplateEngine());
 
-    }
 
+    }
 }
