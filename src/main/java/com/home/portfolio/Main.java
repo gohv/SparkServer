@@ -13,6 +13,16 @@ public class Main {
 
     public static void main(String[] args) {
 
+        ProcessBuilder process = new ProcessBuilder();
+        Integer port;
+        if (process.environment().get("PORT") != null) {
+            port = Integer.parseInt(process.environment().get("PORT"));
+        } else {
+            port = 4567;
+        }
+
+        setPort(port);
+
         staticFileLocation("/public");
         //ne pip!!!
         /*before((request, response) -> {
@@ -33,12 +43,12 @@ public class Main {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/sign-in", ((request, response) -> {
+       /* post("/sign-in", ((request, response) -> {
             Map<String, String> model = new HashMap<>();
             String username = request.queryParams("username");
             response.cookie("username", username);
             return new ModelAndView(model, "sign-in.hbs");
-        }), new HandlebarsTemplateEngine());
+        }), new HandlebarsTemplateEngine());*/
 
         get("/projects", (req, res) -> {
             Map<String, Object> model = new HashMap<String, Object>();

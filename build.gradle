@@ -4,13 +4,29 @@ version '1.0-SNAPSHOT'
 apply plugin: 'java'
 
 sourceCompatibility = 1.8
-
+jar {
+    baseName = 'portfolio-Ideas'
+    version = '0.1.0'
+}
 repositories {
     mavenCentral()
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}
+task stage(type: Copy, dependsOn: [clean, build]) {
+    from jar.archivePath
+    into project.rootDir
+    rename {
+        'app.jar'
+    }
+}
+stage.mustRunAfter(clean)
 
-
+clean << {
+    project.file('app.jar').delete()
+}
 dependencies {
     //group id:artifactID:version
     compile "com.github.slugify:slugify:2.1.5"
